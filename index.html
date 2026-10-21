@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proyecto Cálculo II - UMG | Montaña Rusa</title>
+  
+  <!-- Tailwind CSS para los estilos modernos -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- MathJax para que las ecuaciones se vean de lujo -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            umgNavy: '#0b325b',
+            umgDarkNav: '#072442',
+            umgGreen: '#2a9d8f',
+            umgLightBg: '#f2f6f9',
+            umgCardBg: '#ffffff',
+            umgTextDark: '#1e293b'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    .math-box {
+      background-color: #f8fafc;
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 8px;
+      overflow-x: auto;
+    }
+  </style>
+</head>
+<body class="bg-umgLightBg text-umgTextDark font-sans antialiased">
+
+  <!-- Barra de navegación principal -->
+  <header class="bg-white border-b border-gray-200 sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between h-16 items-center">
+        <!-- Logo oficial de la UMG -->
+        <div class="flex items-center space-x-3">
+          <a href="#inicio" class="flex items-center space-x-2">
+            <img src="Emblema Universitario Azul, Rojo y Oro.png" alt="Logo UMG" class="w-10 h-10 object-contain">
+            <div>
+              <h1 class="font-bold text-slate-800 text-sm leading-tight">Proyecto Cálculo II</h1>
+              <p class="text-xs text-slate-500">Ingeniería en Sistemas</p>
+            </div>
+          </a>
+        </div>
+        
+        <!-- Enlaces del menú -->
+        <nav class="flex space-x-2 sm:space-x-6 text-xs sm:text-sm font-semibold">
+          <a href="#inicio" class="text-umgNavy hover:text-umgGreen transition px-2 py-1">Inicio</a>
+          <a href="#modelos" class="text-slate-600 hover:text-umgNavy transition px-2 py-1">Modelos de GeoGebra</a>
+          <a href="#calculos" class="text-slate-600 hover:text-umgNavy transition px-2 py-1">Fórmulas y Tramos</a>
+          <a href="#demostracion-variables" class="text-slate-600 hover:text-umgNavy transition px-2 py-1">Demostración en Vivo</a>
+          <a href="#resultados" class="text-slate-600 hover:text-umgNavy transition px-2 py-1">Resultados</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sección de portada -->
+  <section id="inicio" class="bg-umgNavy text-white py-12 lg:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+      <div class="lg:col-span-5 bg-umgDarkNav/60 p-6 rounded-xl border border-white/10 shadow-inner">
+        <svg viewBox="0 0 400 200" class="w-full h-auto text-white stroke-current fill-none">
+          <path d="M 0,20 L 400,20 M 0,60 L 400,60 M 0,100 L 400,100 M 0,140 L 400,140 M 0,180 L 400,180" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+          <path d="M 40,0 L 40,200 M 120,0 L 120,200 M 200,0 L 200,200 M 280,0 L 280,200 M 360,0 L 360,200" stroke="#ffffff" stroke-opacity="0.1" stroke-width="1"/>
+          <path d="M 20,20 L 150,160 Q 200,200 230,120 Q 260,40 290,120 Q 320,180 380,120" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>
+          <text x="25" y="40" fill="#ffffff" font-size="10" opacity="0.8">Montaña Rusa - 2D y 3D</text>
+        </svg>
+      </div>
+
+      <div class="lg:col-span-7 space-y-4">
+        <span class="text-xs font-semibold uppercase tracking-widest text-emerald-400">UNIVERSIDAD MARIANO GÁLVEZ DE GUATEMALA</span>
+        <h2 class="text-3xl sm:text-5xl font-extrabold tracking-tight leading-none text-white">
+          DISEÑO MATEMÁTICO DE UNA MONTAÑA RUSA
+        </h2>
+        <p class="text-slate-300 font-medium text-sm sm:text-base">
+          Facultad de Ingeniería en Sistemas · Cálculo II
+        </p>
+        <p class="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-2xl">
+          ¡Qué onda! Esta es la página oficial para presentar nuestro proyecto. Aquí armamos la simulación de la montaña rusa combinando GeoGebra con todo el rollo matemático de integrales, derivadas y longitudes de arco que vimos en clase.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Selector interactivo de modelos de GeoGebra -->
+  <section id="modelos" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+      <div>
+        <span class="text-xs font-bold text-umgGreen uppercase tracking-wider">INTERACTIVO</span>
+        <h3 class="text-3xl font-extrabold text-slate-900 mt-1">Los Modelos en GeoGebra</h3>
+        <p class="text-slate-600 text-sm mt-1">Aquí puedes cambiar entre los diseños que armamos para probarlos en plena exposición.</p>
+      </div>
+      
+      <!-- Pestañas de selección -->
+      <div class="bg-slate-200 p-1.5 rounded-xl flex flex-wrap gap-1">
+        <button onclick="cambiarModeloGeo('2d')" id="btn-geo-2d" class="px-3 py-2 rounded-lg text-xs font-bold transition bg-umgNavy text-white shadow-sm">
+          Vista 2D Básica
+        </button>
+        <button onclick="cambiarModeloGeo('2d-nuevo')" id="btn-geo-2d-nuevo" class="px-3 py-2 rounded-lg text-xs font-bold transition bg-white text-slate-700 hover:bg-slate-100">
+          Vista 2D con Rizo y Postes
+        </button>
+        <button onclick="cambiarModeloGeo('3d')" id="btn-geo-3d" class="px-3 py-2 rounded-lg text-xs font-bold transition bg-white text-slate-700 hover:bg-slate-100">
+          Vista 3D Estructural
+        </button>
+        <button onclick="cambiarModeloGeo('3d-nuevo')" id="btn-geo-3d-nuevo" class="px-3 py-2 rounded-lg text-xs font-bold transition bg-white text-slate-700 hover:bg-slate-100">
+          Vista 3D con Vagón Dinámico
+        </button>
+      </div>
+    </div>
+
+    <!-- Contenedor del GeoGebra en pantalla -->
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden p-4 bg-slate-50">
+      <div id="geogebra-wrapper" class="w-full overflow-hidden rounded-xl border border-slate-200 bg-white"></div>
+      <div class="mt-4 flex justify-between items-center">
+        <p id="geo-descripcion-texto" class="text-xs text-slate-600 font-medium"></p>
+        <a id="geo-enlace-externo" href="#" target="_blank" class="bg-umgNavy hover:bg-slate-800 text-white text-xs font-bold px-4 py-2 rounded-lg transition inline-flex items-center">
+          Abrir en GeoGebra ↗
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sección de desarrollo analítico y fórmulas -->
+  <section id="calculos" class="py-12 bg-slate-100/70 border-y border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div>
+        <span class="text-xs font-bold text-umgGreen uppercase tracking-wider">CÁLCULOS PASO A PASO</span>
+        <h3 class="text-3xl font-extrabold text-slate-900 mt-1">Fórmulas por Tramo</h3>
+        <p class="text-slate-600 text-sm mt-1">Échale un ojo a las ecuaciones, derivadas y longitudes que sacamos para cada sección del recorrido.</p>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Menú de tramos -->
+        <div class="lg:col-span-4 space-y-2 text-xs font-semibold" id="menu-tramos-analiticos">
+          <button onclick="cargarTramoAnalitico('a')" id="btntram-a" class="w-full text-left p-3.5 rounded-xl border transition bg-umgNavy text-white font-bold border-transparent">
+            <p class="text-sm">Tramo de bajada inicial</p>
+          </button>
+          <button onclick="cargarTramoAnalitico('c')" id="btntram-c" class="w-full text-left p-3.5 rounded-xl border transition bg-white hover:bg-slate-50 text-slate-700 border-slate-200">
+            <p class="text-sm">Tramo de hélice en espiral</p>
+          </button>
+          <button onclick="cargarTramoAnalitico('d1')" id="btntram-d1" class="w-full text-left p-3.5 rounded-xl border transition bg-white hover:bg-slate-50 text-slate-700 border-slate-200">
+            <p class="text-sm">Tramo del valle (parábola)</p>
+          </button>
+          <button onclick="cargarTramoAnalitico('rizo')" id="btntram-rizo" class="w-full text-left p-3.5 rounded-xl border transition bg-white hover:bg-slate-50 text-slate-700 border-slate-200">
+            <p class="text-sm">Curva del looping o rizo</p>
+          </button>
+          <button onclick="cargarTramoAnalitico('via3d')" id="btntram-via3d" class="w-full text-left p-3.5 rounded-xl border transition bg-white hover:bg-slate-50 text-slate-700 border-slate-200">
+            <p class="text-sm">Curva tridimensional completa</p>
+          </button>
+        </div>
+
+        <!-- Tarjeta donde aparecen las fórmulas matemáticas -->
+        <div class="lg:col-span-8 bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-6" id="tarjeta-formula-activa"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Módulo de demostración y variables en vivo -->
+  <section id="demostracion-variables" class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+    <div>
+      <span class="text-xs font-bold text-umgGreen uppercase tracking-wider">EXHIBICIÓN EN VIVO</span>
+      <h3 class="text-3xl font-extrabold text-slate-900 mt-1">¿Qué pasa al mover las variables?</h3>
+      <p class="text-slate-600 text-sm mt-1">Esto es lo que explicamos durante la demostración para conectar los deslizadores con las fórmulas.</p>
+    </div>
+
+    <div id="dinamica-variables-container" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- Tabla de resultados finales -->
+  <section id="resultados" class="py-12 bg-slate-100/70 border-t border-slate-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
+      <div>
+        <span class="text-xs font-bold text-umgGreen uppercase tracking-wider">RESUMEN FINAL</span>
+        <h3 class="text-3xl font-extrabold text-slate-900 mt-1">Tabla de Longitudes y Totales</h3>
+        <p class="text-slate-600 text-sm mt-1">Los resultados exactos y aproximados que juntamos de todos los tramos.</p>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs">
+            <thead class="bg-teal-50 text-slate-700 font-bold uppercase border-b border-teal-100">
+              <tr>
+                <th class="p-3">Tramo o Parte</th>
+                <th class="p-3">Fórmula / Expresión</th>
+                <th class="p-3">Medida (Valor)</th>
+                <th class="p-3">En qué se usó</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 font-mono text-slate-800">
+              <tr><td class="p-3 font-bold">Bajada recta inicial</td><td class="p-3">$$5\sqrt{2}$$</td><td class="p-3">7.071</td><td class="p-3 font-sans text-slate-600">Longitud de la bajada recta inicial</td></tr>
+              <tr class="bg-slate-50/50"><td class="p-3 font-bold">Descenso en espiral (hélice)</td><td class="p-3">$$5\sqrt{\pi^2+1}$$</td><td class="p-3">16.485</td><td class="p-3 font-sans text-slate-600">Longitud de la bajada con giro en espiral</td></tr>
+              <tr><td class="p-3 font-bold">Fondo del valle (parábola)</td><td class="p-3">$$2(\sqrt{2}+\ln(1+\sqrt{2}))$$</td><td class="p-3">4.591</td><td class="p-3 font-sans text-slate-600">Curvatura inferior del valle parabólico</td></tr>
+              <tr class="bg-slate-50/50"><td class="p-3 font-bold">Looping o rizo circular</td><td class="p-3">$$\int_{-1.57}^{4.71} 2 dt$$</td><td class="p-3">12.570</td><td class="p-3 font-sans text-slate-600">Distancia del looping o vuelta completa</td></tr>
+              <tr><td class="p-3 font-bold">Pista tridimensional completa</td><td class="p-3">$$\int_{0}^{2\pi} \sqrt{25+36\cos^2(3t)} dt$$</td><td class="p-3">33.850</td><td class="p-3 font-sans text-slate-600">Longitud total de la pista tridimensional</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pie de página -->
+  <footer class="bg-umgNavy text-slate-400 py-8 text-center text-xs border-t border-slate-800">
+    <p>© 2026 Universidad Mariano Gálvez de Guatemala — Facultad de Ingeniería en Sistemas</p>
+    <p class="mt-1 text-slate-500">Proyecto de Cálculo II · Exposición y Demostración</p>
+  </footer>
+
+  <!-- Código JavaScript limpio y comentado de forma humana -->
+  <script>
+    // Aquí guardamos la info de qué mostrar al interactuar con las variables en vivo
+    const dinamicaModelos = {
+      '2d': {
+        cards: [
+          {
+            num: '1',
+            titulo: '¿Qué variables se usan?',
+            desc: 'Usamos el parámetro t para movernos a lo largo del trazo y las coordenadas (x, y, z) para ubicar cada punto del perfil.',
+            formula: 'r(t) = \\langle x(t), y(t), z(t) \\rangle'
+          },
+          {
+            num: '2',
+            titulo: '¿Qué pasa al moverlas?',
+            desc: 'Si cambiamos los valores de t en GeoGebra, el tramo se hace más largo o corto, y la pendiente cambia por completo.',
+            formula: 'r\'(t) = \\langle x\'(t), y\'(t), z\'(t) \\rangle'
+          },
+          {
+            num: '3',
+            titulo: 'Relación con los cálculos',
+            desc: 'La derivada nos da la rapidez en cada punto, y al meterla a la integral obtenemos la distancia exacta de los rieles:',
+            formula: 'L = \\int_{a}^{b} \\|r\'(t)\\| dt'
+          }
+        ]
+      },
+      '2d-nuevo': {
+        cards: [
+          {
+            num: '1',
+            titulo: '¿Qué variables se usan?',
+            desc: 'Aquí entran los puntos de control A-K, los splines que unen las curvas suavemente, y el deslizador a del carrito.',
+            formula: 'P_{\\text{carrito}} = \\text{Si}(a \\le 1, P_1(a), \\dots)'
+          },
+          {
+            num: '2',
+            titulo: '¿Qué pasa al moverlas?',
+            desc: 'Cuando movemos el deslizador a en vivo, el vagón avanza por la pista y los postes verdes calculan su altura automáticamente.',
+            formula: 'h(t) = z(P(t)) - 0'
+          },
+          {
+            num: '3',
+            titulo: 'Relación con los cálculos',
+            desc: 'Los splines aseguran que las uniones no tengan saltos bruscos empalmando las derivadas de los tramos:',
+            formula: '\\lim_{t \\to t_0^-} r\'(t) = \\lim_{t \\to t_0^+} r\'(t)'
+          }
+        ]
+      },
+      '3d': {
+        cards: [
+          {
+            num: '1',
+            titulo: '¿Qué variables se usan?',
+            desc: 'Trabajamos con las tres dimensiones (x, y, z) al mismo tiempo y con el radio r para calcular el grosor de los soportes.',
+            formula: '\\gamma(t) = \\langle 35\\cos(3t), 80\\sin(t+1), 50\\sin^2(t)+20 \\rangle'
+          },
+          {
+            num: '2',
+            titulo: '¿Qué pasa al moverlas?',
+            desc: 'Al cambiar los números de la función 3D, el riel gira en el espacio y los cilindros de soporte ajustan su tamaño.',
+            formula: 'V = \\int_{0}^{h(t)} \\pi r^2 dx'
+          },
+          {
+            num: '3',
+            titulo: 'Relación con los cálculos',
+            desc: 'La distancia total en el espacio se calcula sumando las tres componentes dentro de la raíz cuadrada de la integral:',
+            formula: 'L_{\\text{3D}} = \\int \\sqrt{(x\')^2 + (y\')^2 + (z\')^2} dt'
+          }
+        ]
+      },
+      '3d-nuevo': {
+        cards: [
+          {
+            num: '1',
+            titulo: '¿Qué variables se usan?',
+            desc: 'Tenemos la curva espacial via(t), el deslizador k para el vagón y el ángulo u para repartir los postes.',
+            formula: '\\text{via}(t) = \\langle 5\\cos t, 5\\sin t, 2\\sin(3t)+3 \\rangle'
+          },
+          {
+            num: '2',
+            titulo: '¿Qué pasa al moverlas?',
+            desc: 'Si arrastramos el deslizador k de -5 a 5, el vagón corre por la pista 3D y nos muestra sus coordenadas exactas.',
+            formula: '\\text{Vagon} = \\text{via}(k)'
+          },
+          {
+            num: '3',
+            titulo: 'Relación con los cálculos',
+            desc: 'La rapidez que sacamos de la derivada tridimensional es la que manda sobre cómo se mueve el carrito en la pantalla:',
+            formula: '\\|\\text{via\'}(t)\\| = \\sqrt{25 + 36\\cos^2(3t)}'
+          }
+        ]
+      }
+    };
+
+    // Enlaces e iframes de los modelos de GeoGebra
+    const geoModelos = {
+      '2d': {
+        nombre: 'Vista 2D Básica',
+        iframe: '<iframe src="https://www.geogebra.org/classic/de6papgj?embed" width="100%" height="450" allowfullscreen style="border: 0;" frameborder="0"></iframe>',
+        link: 'https://www.geogebra.org/classic/de6papgj',
+        desc: 'El perfil lateral clásico con rectas, hélice, valle y una onda sencilla.'
+      },
+      '2d-nuevo': {
+        nombre: 'Vista 2D con Rizo y Postes',
+        iframe: '<iframe src="https://www.geogebra.org/classic/qeq3cy6w?embed" width="100%" height="450" allowfullscreen style="border: 0;" frameborder="0"></iframe>',
+        link: 'https://www.geogebra.org/classic/qeq3cy6w',
+        desc: 'Modelo con splines, un looping y los postes verdes de soporte.'
+      },
+      '3d': {
+        nombre: 'Vista 3D Estructural',
+        iframe: '<iframe src="https://www.geogebra.org/classic/eyp5c7jv?embed" width="100%" height="450" allowfullscreen style="border: 0;" frameborder="0"></iframe>',
+        link: 'https://www.geogebra.org/classic/eyp5c7jv',
+        desc: 'La versión tridimensional completa con hélice y soportes cilíndricos.'
+      },
+      '3d-nuevo': {
+        nombre: 'Vista 3D con Vagón Dinámico',
+        iframe: '<iframe src="https://www.geogebra.org/classic/ehd9te2z?embed" width="100%" height="450" allowfullscreen style="border: 0;" frameborder="0"></iframe>',
+        link: 'https://www.geogebra.org/classic/ehd9te2z',
+        desc: 'Modelo 3D con la curva paramétrica y el deslizador para mover el vagón.'
+      }
+    };
+
+    // Función para cambiar de modelo al hacer clic en los botones superiores
+    function cambiarModeloGeo(tipo) {
+      ['2d', '2d-nuevo', '3d', '3d-nuevo'].forEach(t => {
+        const btn = document.getElementById(`btn-geo-${t}`);
+        if(t === tipo) {
+          btn.className = "px-3 py-2 rounded-lg text-xs font-bold transition bg-umgNavy text-white shadow-sm";
+        } else {
+          btn.className = "px-3 py-2 rounded-lg text-xs font-bold transition bg-white text-slate-700 hover:bg-slate-100";
+        }
+      });
+
+      const m = geoModelos[tipo];
+      document.getElementById('geogebra-wrapper').innerHTML = m.iframe;
+      document.getElementById('geo-descripcion-texto').textContent = m.desc;
+      document.getElementById('geo-enlace-externo').href = m.link;
+
+      const din = dinamicaModelos[tipo];
+      let htmlDin = '';
+      din.cards.forEach(c => {
+        htmlDin += `
+          <div class="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm space-y-3">
+            <div class="w-8 h-8 rounded-full bg-teal-100 text-teal-800 flex items-center justify-center font-bold text-sm">${c.num}</div>
+            <h4 class="font-bold text-slate-900 text-base">${c.titulo}</h4>
+            <p class="text-xs text-slate-600 leading-relaxed">${c.desc}</p>
+            <div class="math-box text-center text-xs font-semibold">$$${c.formula}$$</div>
+          </div>
+        `;
+      });
+      document.getElementById('dinamica-variables-container').innerHTML = htmlDin;
+
+      if (window.MathJax) {
+        MathJax.typesetPromise();
+      }
+    }
+
+    // Datos analíticos de las fórmulas por tramo
+    const tramosAnaliticos = {
+      a: {
+        titulo: 'Tramo a — Recta de Bajada Principal',
+        puntos: '(0, 0, 5) → (0, 5, 0)',
+        ec: '\\begin{cases} x = 0 \\\\ y = t \\\\ z = 5 - t \\end{cases} \\quad 0 \\le t \\le 5',
+        deriv: "r'(t) = (0, 1, -1)",
+        rap: '\\|r\'(t)\\| = \\sqrt{0^2 + 1^2 + (-1)^2} = \\sqrt{2}',
+        lon: 'L = \\int_{0}^{5} \\sqrt{2} dt = 5\\sqrt{2} \\approx 7.071',
+        nota: 'Es la bajada recta del inicio. Como la pendiente no cambia, la rapidez es pareja todo el tramo.'
+      },
+      c: {
+        titulo: 'Tramo c — Descenso en Hélice Espacial',
+        puntos: '(0, -2, 5) → (-2, -2, 0)',
+        ec: '\\begin{cases} x = \\cos(\\pi t) - 1 \\\\ y = -\\sin(\\pi t) - 2 \\\\ z = 5 - t \\end{cases} \\quad 0 \\le t \\le 5',
+        deriv: "r'(t) = (-\\pi\\sin(\\pi t), -\\pi\\cos(\\pi t), -1)",
+        rap: '\\|r\'(t)\\| = \\sqrt{\\pi^2 \\sin^2(\\pi t) + \\pi^2 \\cos^2(\\pi t) + 1} = \\sqrt{\\pi^2 + 1}',
+        lon: 'L = \\int_{0}^{5} \\sqrt{\\pi^2 + 1} dt = 5\\sqrt{\\pi^2 + 1} \\approx 16.485',
+        nota: 'Aquí se combina el giro en círculo con la bajada en z. ¡Es el tramo más largo de todo el recorrido!'
+      },
+      d1: {
+        titulo: 'Tramo d₁ — Valle Parabólico',
+        puntos: '(-2, -2, 0) → (-2, 2, 0)',
+        ec: '\\begin{cases} x = -2 \\\\ y = t \\\\ z = \\frac{1}{4}t^2 - 1 \\end{cases} \\quad -2 \\le t \\le 2',
+        deriv: "r'(t) = \\left(0, 1, \\frac{t}{2}\\right)",
+        rap: '\\|r\'(t)\\| = \\sqrt{1 + \\frac{t^2}{4}}',
+        lon: 'L = \\int_{-2}^{2} \\sqrt{1 + \\frac{t^2}{4}} dt = 2(\\sqrt{2} + \\ln(1+\\sqrt{2})) \\approx 4.591',
+        nota: 'El fondo del valle queda exactamente en t = 0 con z = -1. Aquí el carrito frena un poco antes de volver a subir.'
+      },
+      rizo: {
+        titulo: 'Curva c₄ — Looping / Rizo Circular',
+        puntos: 'Plano vertical centrado en F',
+        ec: '\\begin{cases} x = 19 + 2\\cos(t) \\\\ y = 4 + 2 + 2\\sin(t) \\end{cases} \\quad -1.57 \\le t \\le 4.71',
+        deriv: "r'(t) = (-2\\sin(t), 2\\cos(t))",
+        rap: '\\|r\'(t)\\| = \\sqrt{(-2\\sin t)^2 + (2\\cos t)^2} = 2',
+        lon: 'L = \\int_{-1.57}^{4.71} 2 dt = 2(4.71 - (-1.57)) \\approx 12.57',
+        nota: 'Muestra cómo calculamos la vuelta de 360 grados usando una curva circular cerrada de radio r = 2.'
+      },
+      via3d: {
+        titulo: 'Curva Espacial Avanzada (via 3D)',
+        puntos: 'Trayectoria paramétrica tridimensional',
+        ec: '\\begin{cases} x = 5\\cos(t) \\\\ y = 5\\sin(t) \\\\ z = 2\\sin(3t) + 3 \\end{cases} \\quad 0 \\le t \\le 2\\pi',
+        deriv: "via'(t) = (-5\\sin(t), 5\\cos(t), 6\\cos(3t))",
+        rap: '\\|via\'(t)\\| = \\sqrt{25 + 36\\cos^2(3t)}',
+        lon: 'L = \\int_{0}^{2\\pi} \\sqrt{25 + 36\\cos^2(3t)} dt \\approx 33.850',
+        nota: 'Junta funciones trigonométricas en tres dimensiones para armar la pista completa y calcular sus soportes.'
+      }
+    };
+
+    // Función para mostrar las fórmulas del tramo seleccionado
+    function cargarTramoAnalitico(key) {
+      ['a', 'c', 'd1', 'rizo', 'via3d'].forEach(k => {
+        const b = document.getElementById(`btntram-${k}`);
+        if(b) {
+          if(k === key) {
+            b.className = "w-full text-left p-3.5 rounded-xl border transition bg-umgNavy text-white font-bold border-transparent shadow-sm";
+          } else {
+            b.className = "w-full text-left p-3.5 rounded-xl border transition bg-white hover:bg-slate-50 text-slate-700 border-slate-200";
+          }
+        }
+      });
+
+      const data = tramosAnaliticos[key];
+      let html = `
+        <div class="border-b pb-4">
+          <h4 class="text-xl font-bold text-slate-900">${data.titulo}</h4>
+          <span class="text-xs font-mono text-teal-700 bg-teal-50 px-2 py-0.5 rounded border border-teal-200 mt-2 inline-block">Coordenadas: ${data.puntos}</span>
+        </div>
+        <div>
+          <h5 class="text-xs font-bold text-slate-500 uppercase">Ecuación Paramétrica</h5>
+          <div class="math-box text-center">$$${data.ec}$$</div>
+          <p class="text-xs text-slate-500 mt-2">${data.nota}</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <h5 class="text-xs font-bold text-slate-500 uppercase">Vector Tangente / Derivada</h5>
+            <div class="math-box text-center">$$${data.deriv}$$</div>
+          </div>
+          <div>
+            <h5 class="text-xs font-bold text-slate-500 uppercase">Rapidez \\(\\|r'(t)\\|\\)</h5>
+            <div class="math-box text-center">$$${data.rap}$$</div>
+          </div>
+        </div>
+        <div>
+          <h5 class="text-xs font-bold text-slate-500 uppercase">Planteamiento de Integral (Longitud de Arco)</h5>
+          <div class="math-box text-center">$$${data.lon}$$</div>
+        </div>
+      `;
+
+      document.getElementById('tarjeta-formula-activa').innerHTML = html;
+      if (window.MathJax) {
+        MathJax.typesetPromise();
+      }
+    }
+
+    // Inicializar la página cargando el modelo predeterminado al abrir
+    document.addEventListener("DOMContentLoaded", () => {
+      cambiarModeloGeo('2d');
+      cargarTramoAnalitico('a');
+    });
+  </script>
+</body>
+</html>
